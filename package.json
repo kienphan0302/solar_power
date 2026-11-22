@@ -1,0 +1,30 @@
+{
+  "name": "solar-marketing-starter",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24.0.0" },
+  "scripts": {
+    "setup": "node scripts/setup-local.mjs",
+    "dev": "astro dev --host 127.0.0.1",
+    "check": "astro check",
+    "build": "astro build",
+    "preview": "wrangler pages dev dist --ip 127.0.0.1",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "db:local": "wrangler d1 execute solar-leads --local --file=schema.sql"
+  },
+  "dependencies": {
+    "astro": "7.4.13",
+    "@astrojs/sitemap": "latest",
+    "tailwindcss": "^4.0.0",
+    "@tailwindcss/vite": "^4.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "4.166.0",
+    "@astrojs/check": "latest",
+    "@cloudflare/workers-types": "latest",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0",
+    "tsx": "^4.0.0"
+  }
+}

@@ -1,0 +1,53 @@
+---
+import '../styles/global.css';
+import { site } from '../config/site';
+interface Props { title: string; description?: string; }
+const { title, description = site.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const configuredGtm = import.meta.env.PUBLIC_GTM_ID || '';
+const gtmId = /^GTM-[A-Z0-9]+$/.test(configuredGtm) ? configuredGtm : '';
+---
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#124d3a" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical.href} />
+    <link rel="canonical" href={canonical.href} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {!site.readyToIndex && <meta name="robots" content="noindex, nofollow" />}
+    <title>{title}</title>
+    {gtmId && <script is:inline define:vars={{ gtmId }}>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer',gtmId);
+    </script>}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Đến nội dung chính</a>
+    <header class="site-header">
+      <a href="/" class="brand"><span class="brand-mark" aria-hidden="true">☀</span>{site.brand}</a>
+      <nav aria-label="Điều hướng chính"><a href="/#giai-phap">Giải pháp</a><a href="/#quy-trinh">Quy trình</a><a href="/#tu-van" class="button button-small">Nhận tư vấn</a></nav>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site-footer">
+      <div><strong>{site.brand}</strong><p>{site.description}</p>{site.address && <p>{site.address}</p>}{site.email && <a href={`mailto:${site.email}`}>{site.email}</a>}</div>
+      <div><a href="/chinh-sach-bao-mat/">Chính sách bảo mật</a><p>© {new Date().getFullYear()} {site.brand}</p></div>
+    </footer>
+    {site.phone && <div class="mobile-contact"><a href={`tel:${site.phone}`} data-track="click_phone">Gọi tư vấn</a>{site.zalo && <a href={site.zalo} target="_blank" rel="noopener noreferrer" data-track="click_zalo">Nhắn Zalo</a>}</div>}
+    <script>
+      document.querySelectorAll<HTMLAnchorElement>('[data-track]').forEach(link => {
+        link.addEventListener('click', () => {
+          const w = window as Window & { dataLayer?: Record<string, unknown>[] };
+          (w.dataLayer ||= []).push({ event: link.dataset.track, page_path: location.pathname });
+        });
+      });
+    </script>
+  </body>
+</html>
