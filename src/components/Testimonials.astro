@@ -1,0 +1,254 @@
+---
+import { testimonials, type CustomerTestimonial } from '../data/testimonials';
+
+interface Props {
+  preview?: boolean;
+}
+
+const { preview = import.meta.env.DEV } = Astro.props;
+const published = testimonials.filter(
+  entry => entry.approvedForPublication && entry.name.trim() && entry.quote.trim()
+);
+const isPreview = preview && published.length === 0;
+const placeholders: CustomerTestimonial[] = [
+  {
+    id: 'preview-consultation',
+    name: 'Tên khách hàng',
+    quote: 'Vị trí dành cho phản hồi thực tế về quá trình tư vấn, giải thích cấu hình và báo giá.',
+    project: 'Giải pháp đã lựa chọn',
+    location: 'Khu vực lắp đặt',
+    approvedForPublication: false,
+  },
+  {
+    id: 'preview-installation',
+    name: 'Tên khách hàng',
+    quote: 'Vị trí dành cho phản hồi thực tế về quá trình thi công, bàn giao và hướng dẫn sử dụng.',
+    project: 'Giải pháp đã lựa chọn',
+    location: 'Khu vực lắp đặt',
+    approvedForPublication: false,
+  },
+  {
+    id: 'preview-support',
+    name: 'Tên khách hàng',
+    quote: 'Vị trí dành cho phản hồi thực tế về trải nghiệm sử dụng và sự hỗ trợ sau lắp đặt.',
+    project: 'Giải pháp đã lựa chọn',
+    location: 'Khu vực lắp đặt',
+    approvedForPublication: false,
+  },
+];
+const entries = isPreview ? placeholders : published;
+const initials = (name: string) => {
+  const parts = name.trim().split(/\s+/u);
+  return [parts[0], ...(parts.length > 1 ? [parts[parts.length - 1]] : [])]
+    .map(part => part.charAt(0))
+    .join('')
+    .toLocaleUpperCase('vi');
+};
+---
+
+{entries.length > 0 && (
+  <section class="section testimonials-section" id="khach-hang" aria-labelledby="testimonials-title">
+    <div class="container">
+      <div class="section-heading testimonials-heading">
+        <div>
+          <p class="eyebrow">GÓC CHIA SẺ</p>
+          <h2 id="testimonials-title">Khách hàng nói về chúng tôi</h2>
+        </div>
+        <p>Những chia sẻ về quá trình tư vấn, lắp đặt và đồng hành cùng Hướng Dương Solar.</p>
+      </div>
+
+      {isPreview && (
+        <p class="testimonials-preview-note" role="note">
+          Bản xem trước bố cục · Nội dung và tên khách hàng chờ bổ sung phản hồi thực tế.
+        </p>
+      )}
+
+      <div class:list={['testimonials-grid', { 'testimonials-single': entries.length === 1 }]}>
+        {entries.map((entry, index) => (
+          <figure class="testimonial-card">
+            <span class="testimonial-quote-mark" aria-hidden="true">“</span>
+            <blockquote><p>{entry.quote}</p></blockquote>
+            <figcaption>
+              <span class="testimonial-avatar" aria-hidden="true">
+                {isPreview ? `0${index + 1}` : initials(entry.name)}
+              </span>
+              <div class="testimonial-person">
+                <strong>{entry.name}</strong>
+                {(entry.project || entry.location) && (
+                  <span>{[entry.project, entry.location].filter(Boolean).join(' · ')}</span>
+                )}
+              </div>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <div class="testimonials-footer">
+        <p>Bắt đầu từ nhu cầu của bạn.</p>
+        <a class="inline-link" href="#tu-van">Trao đổi với Hướng Dương Solar <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .testimonials-section {
+    background: var(--pale);
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 160px;
+  }
+
+  .testimonials-heading h2 {
+    max-width: 640px;
+  }
+
+  .testimonials-heading > p {
+    max-width: 320px;
+  }
+
+  .testimonials-preview-note {
+    display: inline-block;
+    margin-bottom: 22px;
+    padding: 8px 13px;
+    border: 1px dashed #b4c7b5;
+    border-radius: 6px;
+    color: #4b6654;
+    background: #fff;
+    font-size: .8rem;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 22px;
+  }
+
+  .testimonials-single {
+    max-width: 760px;
+  }
+
+  .testimonial-card {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    background: #fff;
+  }
+
+  .testimonial-quote-mark {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    background: #f4f6df;
+    color: var(--green);
+    font-family: Georgia, serif;
+    font-size: 3.2rem;
+    line-height: 1;
+    padding-top: 9px;
+  }
+
+  .testimonial-card blockquote {
+    margin: 0 0 28px;
+  }
+
+  .testimonial-card blockquote p {
+    color: var(--ink);
+    font-size: 1rem;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+  }
+
+  .testimonial-card figcaption {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: auto;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+  }
+
+  .testimonial-avatar {
+    display: grid;
+    place-items: center;
+    flex: 0 0 43px;
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    background: var(--green);
+    color: var(--lime);
+    font-size: .85rem;
+    font-weight: 700;
+    letter-spacing: .03em;
+  }
+
+  .testimonial-person {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .testimonial-person strong {
+    display: block;
+    color: var(--ink);
+    font-size: .95rem;
+    font-weight: 700;
+  }
+
+  .testimonial-person > span {
+    display: block;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: .8rem;
+    line-height: 1.6;
+  }
+
+  .testimonials-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    margin-top: 28px;
+  }
+
+  .testimonials-footer p {
+    font-size: .9rem;
+  }
+
+  .testimonials-footer .inline-link {
+    line-height: 1.8;
+  }
+
+  .testimonials-footer a span {
+    margin-left: 4px;
+  }
+
+  @media (max-width: 600px) {
+    .testimonials-section {
+      scroll-margin-top: 95px;
+    }
+
+    .testimonials-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .testimonials-heading h2 {
+      max-width: 340px;
+    }
+
+    .testimonial-card {
+      padding: 24px 22px;
+    }
+
+    .testimonials-footer .inline-link {
+      font-size: .875rem;
+    }
+  }
+</style>
