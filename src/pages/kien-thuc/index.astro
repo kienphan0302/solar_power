@@ -1,0 +1,7 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import Consultation from '../../components/Consultation.astro';
+import {articles} from '../../data/articles';
+---
+<BaseLayout title="Kiến thức & tư vấn điện mặt trời | Hướng Dương Solar"><PageIntro eyebrow="GÓC TƯ VẤN" title="Hiểu rõ trước khi lựa chọn." description="Những thông tin giúp bạn chuẩn bị cho buổi tư vấn, khảo sát và đọc báo giá điện mặt trời."/><section class="section container"><div class="article-grid">{articles.map(article=><a class="article-card" href={`/kien-thuc/${article.slug}/`}><p class="eyebrow">{article.tag}</p><h2>{article.title}</h2><p>{article.summary}</p><span class="inline-link">Đọc bài hướng dẫn</span></a>)}</div></section><Consultation/></BaseLayout>

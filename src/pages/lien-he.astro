@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Consultation from '../components/Consultation.astro';
+import Icon from '../components/Icon.astro';
+import {site} from '../config/site';
+---
+<BaseLayout title="Liên hệ tư vấn & khảo sát điện mặt trời | Hướng Dương Solar"><PageIntro eyebrow="LIÊN HỆ HƯỚNG DƯƠNG SOLAR" title="Trao đổi nhu cầu của bạn." description="Liên hệ hotline, Zalo hoặc để lại yêu cầu để được trao đổi về cấu hình, khảo sát và chi phí lắp đặt."/><section class="section container"><div class="contact-grid"><a class="contact-card" href={`tel:${site.phone}`} data-track="click_phone"><Icon name="phone" size={30}/><h2>Gọi tư vấn</h2><strong>{site.phoneDisplay}</strong><p>Trao đổi nhu cầu lắp đặt và cấu hình tham khảo.</p></a><a class="contact-card" href={site.zalo} target="_blank" rel="noopener noreferrer" data-track="click_zalo"><Icon name="chat" size={30}/><h2>Nhắn Zalo</h2><strong>{site.supportPhone}</strong><p>Gửi ảnh mái nhà và thông tin công trình.</p></a><a class="contact-card" href={`mailto:${site.email}`}><Icon name="mail" size={30}/><h2>Gửi email</h2><strong>{site.email}</strong><p>Gửi yêu cầu tư vấn hoặc thông tin cần hỗ trợ.</p></a></div><div class="address-grid"><article><h3>Liên hệ tại Hà Nội</h3><p>{site.address}</p></article><article><h3>Thông tin tại TP. Hồ Chí Minh</h3><p>{site.hcmAddress}</p></article></div><p class="price-note">Vui lòng liên hệ trước để thống nhất lịch gặp hoặc lịch khảo sát.</p></section><Consultation/></BaseLayout>

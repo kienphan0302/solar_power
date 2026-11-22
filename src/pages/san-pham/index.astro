@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import Consultation from '../../components/Consultation.astro';
+import { products } from '../../data/catalog';
+---
+<BaseLayout title="Sản phẩm điện mặt trời hòa lưới & lưu trữ | Hướng Dương Solar"><PageIntro eyebrow="DANH MỤC GIẢI PHÁP" title="Tìm cấu hình điện mặt trời." description="Tham khảo các hệ hòa lưới bám tải và hybrid lưu trữ. Đội ngũ tư vấn sẽ trao đổi cấu hình phù hợp sau khảo sát."/>
+<section class="section container"><form id="catalog-controls" class="catalog-controls" role="search"><label class="catalog-search">Tìm sản phẩm<input id="catalog-search" type="search" name="q" placeholder="Nhập tên hoặc công suất, ví dụ: 8 kW"/></label><label>Loại hệ thống<select id="catalog-category" name="category"><option value="all">Tất cả giải pháp</option><option value="hoa-luoi">Hòa lưới bám tải</option><option value="luu-tru">Hybrid lưu trữ</option></select></label><label>Sắp xếp<select id="catalog-sort" name="sort"><option value="capacity">Công suất tăng dần</option><option value="price-asc">Giá thấp đến cao</option><option value="price-desc">Giá cao đến thấp</option></select></label><button type="submit" class="button">Tìm kiếm</button></form><p id="catalog-count" class="catalog-count" role="status" aria-live="polite">Có {products.length} cấu hình tham khảo</p><div id="catalog-grid" class="product-grid">{products.map(product=><ProductCard product={product}/>)}</div><div id="catalog-empty" class="empty-state" hidden><h2>Chưa tìm thấy cấu hình phù hợp.</h2><p>Thử tìm bằng công suất khác hoặc liên hệ để được tư vấn riêng.</p><button id="catalog-reset" class="button button-outline" type="button">Xem tất cả sản phẩm</button></div><p class="price-note">Giá tham khảo theo danh mục ngày 22/11/2026. Cấu hình thiết bị, dung lượng pin lưu trữ và chi phí thi công cần được xác nhận trong báo giá cụ thể.</p></section><Consultation/></BaseLayout>
+<script>
+  const form=document.querySelector<HTMLFormElement>('#catalog-controls')!;
+  const input=document.querySelector<HTMLInputElement>('#catalog-search')!;
+  const category=document.querySelector<HTMLSelectElement>('#catalog-category')!;
+  const sort=document.querySelector<HTMLSelectElement>('#catalog-sort')!;
+  const grid=document.querySelector<HTMLDivElement>('#catalog-grid')!;
+  const items=Array.from(grid.querySelectorAll<HTMLElement>('[data-product]'));
+  const normalize=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').toLowerCase().replace(/[^a-z0-9]/g,'');
+  const params=new URLSearchParams(location.search);
+  input.value=params.get('q')||'';
+  if(['hoa-luoi','luu-tru'].includes(params.get('category')||''))category.value=params.get('category')!;
+  if(['capacity','price-asc','price-desc'].includes(params.get('sort')||''))sort.value=params.get('sort')!;
+  function update(){let count=0;items.sort((a,b)=>sort.value==='price-desc'?Number(b.dataset.price)-Number(a.dataset.price):sort.value==='price-asc'?Number(a.dataset.price)-Number(b.dataset.price):Number(a.dataset.capacity)-Number(b.dataset.capacity));for(const item of items){const show=(category.value==='all'||item.dataset.category===category.value)&&normalize(item.dataset.name||'').includes(normalize(input.value));item.hidden=!show;if(show)count++;grid.append(item);}document.querySelector('#catalog-count')!.textContent=`Có ${count} cấu hình phù hợp`;document.querySelector<HTMLElement>('#catalog-empty')!.hidden=count!==0;const next=new URL(location.href);for(const key of ['q','category','sort'])next.searchParams.delete(key);if(input.value)next.searchParams.set('q',input.value);if(category.value!=='all')next.searchParams.set('category',category.value);if(sort.value!=='capacity')next.searchParams.set('sort',sort.value);history.replaceState(null,'',next);}
+  form.addEventListener('submit',e=>{e.preventDefault();update();});input.addEventListener('input',update);category.addEventListener('change',update);sort.addEventListener('change',update);document.querySelector('#catalog-reset')?.addEventListener('click',()=>{input.value='';category.value='all';sort.value='capacity';update();});update();
+</script>

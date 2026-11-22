@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import Consultation from '../../components/Consultation.astro';
+import {articles} from '../../data/articles';
+export function getStaticPaths(){return articles.map(article=>({params:{slug:article.slug},props:{article}}));}
+const {article}=Astro.props;
+---
+<BaseLayout title={`${article.title} | Hướng Dương Solar`} description={article.summary}><PageIntro eyebrow={article.tag} title={article.title} description={article.summary}/><article class="section container prose-page">{article.sections.map((section:{title:string;text:string})=><section><h2>{section.title}</h2><p>{section.text}</p></section>)}<p class="article-note">Thông tin hướng dẫn chung. Phương án kỹ thuật và báo giá cần được xác nhận theo công trình thực tế.</p><a class="inline-link" href="/kien-thuc/">Xem các bài tư vấn khác</a></article><Consultation/></BaseLayout>

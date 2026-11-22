@@ -1,0 +1,102 @@
+[
+  {
+    "id": 478,
+    "slug": "dien-nang-luong-mat-troi-6kw-hoa-luoi",
+    "name": "Điện mặt trời 6 kW hòa lưới bám tải",
+    "capacity": 6,
+    "category": "hoa-luoi",
+    "price": 42000000,
+    "image": "system-grid",
+    "sourceUrl": "https://diennangluongmattroisolar.com/san-pham/dien-nang-luong-mat-troi-6kw-hoa-luoi/"
+  },
+  {
+    "id": 481,
+    "slug": "dien-nang-luong-mat-troi-6kw-hoa-luoi-bam-tai",
+    "name": "Điện mặt trời 8 kW hòa lưới bám tải",
+    "capacity": 8,
+    "category": "hoa-luoi",
+    "price": 56000000,
+    "image": "system-grid",
+    "sourceUrl": "https://diennangluongmattroisolar.com/san-pham/dien-nang-luong-mat-troi-6kw-hoa-luoi-bam-tai/"
+  },
+  {
+    "id": 485,
+    "slug": "dien-nang-luong-mat-troi-hoa-luoi-bam-tai-12kw",
+    "name": "Điện mặt trời 12 kW hòa lưới bám tải",
+    "capacity": 12,
+    "category": "hoa-luoi",
+    "price": 84000000,
+    "image": "system-grid",
+    "sourceUrl": "https://diennangluongmattroisolar.com/san-pham/dien-nang-luong-mat-troi-hoa-luoi-bam-tai-12kw/"
+  },
+  {
+    "id": 487,
+    "slug": "dien-nang-luong-mat-troi-hoa-luoi-bam-tai-16kw",
+    "name": "Điện mặt trời 16 kW hòa lưới bám tải",
+    "capacity": 16,
+    "category": "hoa-luoi",
+    "price": 112000000,
+    "image": "system-grid",
+    "sourceUrl": "https://diennangluongmattroisolar.com/san-pham/dien-nang-luong-mat-troi-hoa-luoi-bam-tai-16kw/"
+  },
+  {
+    "id": 489,
+    "slug": "dien-nang-luong-mat-troi-hoa-luoi-bam-tai-20kw",
+    "name": "Điện mặt trời 20 kW hòa lưới bám tải",
+    "capacity": 20,
+    "category": "hoa-luoi",
+    "price": 140000000,
+    "image": "system-grid",
+    "sourceUrl": "https://diennangluongmattroisolar.com/san-pham/dien-nang-luong-mat-troi-hoa-luoi-bam-tai-20kw/"
+  },
+  {
+    "id": 458,
+    "slug": "dien-nang-luong-mat-troi-5kw-luu-tru",
+    "name": "Điện mặt trời 5 kW lưu trữ",
+    "capacity": 5,
+    "category": "luu-tru",
+    "price": 53000000,
+    "image": "storage-5",
+    "sourceUrl": "https://diennangluongmattroisolar.com/san-pham/dien-nang-luong-mat-troi-5kw-luu-tru/"
+  },
+  {
+    "id": 468,
+    "slug": "dien-mat-troi-8kw",
+    "name": "Điện mặt trời 8 kW lưu trữ",
+    "capacity": 8,
+    "category": "luu-tru",
+    "price": 80000000,
+    "image": "storage-8",
+    "sourceUrl": "https://diennangluongmattroisolar.com/san-pham/dien-mat-troi-8kw/"
+  },
+  {
+    "id": 471,
+    "slug": "dien-mat-troi-luu-tru",
+    "name": "Điện mặt trời 12 kW lưu trữ",
+    "capacity": 12,
+    "category": "luu-tru",
+    "price": 115000000,
+    "image": "storage-12",
+    "sourceUrl": "https://diennangluongmattroisolar.com/san-pham/dien-mat-troi-luu-tru/"
+  },
+  {
+    "id": 473,
+    "slug": "dien-nang-luong-mat-troi-16kw-luu-tru",
+    "name": "Điện mặt trời 16 kW lưu trữ",
+    "capacity": 16,
+    "category": "luu-tru",
+    "price": 150000000,
+    "image": "storage-16",
+    "sourceUrl": "https://diennangluongmattroisolar.com/san-pham/dien-nang-luong-mat-troi-16kw-luu-tru/"
+  },
+  {
+    "id": 475,
+    "slug": "dien-nang-luong-mat-troi-20kw-luu-tru",
+    "name": "Điện mặt trời 20 kW lưu trữ",
+    "capacity": 20,
+    "category": "luu-tru",
+    "price": 180000000,
+    "image": "storage-20",
+    "sourceUrl": "https://diennangluongmattroisolar.com/san-pham/dien-nang-luong-mat-troi-20kw-luu-tru/"
+  }
+]

@@ -1,0 +1,8 @@
+---
+import LeadForm from './LeadForm.astro';
+import Icon from './Icon.astro';
+import { site } from '../config/site';
+interface Props { title?: string; }
+const { title = 'Một mái nhà. Một giải pháp phù hợp.' } = Astro.props;
+---
+<section class="consult-section" id="tu-van"><div class="container consult-grid"><div class="consult-copy"><p class="eyebrow light">BẮT ĐẦU TỪ NHU CẦU CỦA BẠN</p><h2>{title}</h2><p>Chia sẻ khu vực lắp đặt và nhu cầu sử dụng điện. Đội ngũ tư vấn sẽ trao đổi về phương án khảo sát, thiết bị và chi phí phù hợp.</p><a class="consult-phone" href={`tel:${site.phone}`} data-track="click_phone"><Icon name="phone" size={30} /><span><small>HOTLINE TƯ VẤN</small>{site.phoneDisplay}</span></a><ul class="consult-list"><li><Icon name="check" />Đề xuất cấu hình theo nhu cầu</li><li><Icon name="check" />Trao đổi rõ các hạng mục báo giá</li><li><Icon name="check" />Thông tin liên hệ được dùng để xử lý yêu cầu</li></ul></div><div class="form-panel"><h3>Đăng ký nhận tư vấn</h3><p>Hai thông tin bắt buộc: số điện thoại và khu vực lắp đặt.</p><LeadForm /></div></div></section>

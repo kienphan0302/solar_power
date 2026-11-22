@@ -1,0 +1,11 @@
+---
+import {Image} from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Consultation from '../components/Consultation.astro';
+import Icon from '../components/Icon.astro';
+import roof from '../assets/solar/roof-detail.jpg';
+import logo from '../assets/solar/logo.jpg';
+import {site} from '../config/site';
+---
+<BaseLayout title="Về Hướng Dương Solar | Điện mặt trời gia đình & doanh nghiệp"><PageIntro eyebrow="VỀ CHÚNG TÔI" title="Hướng Dương Solar." description="Năng lượng xanh. Tương lai bền vững."/><section class="section container about-grid"><div class="about-copy"><Image src={logo} alt="Logo Hướng Dương Solar" width={160} format="webp" class="about-logo"/><h2>{site.company}</h2><p>Hướng Dương Solar giới thiệu các giải pháp điện mặt trời cho gia đình và doanh nghiệp, bao gồm hòa lưới bám tải và hệ thống có lưu trữ.</p><p>Quá trình tư vấn bắt đầu từ nhu cầu sử dụng điện, điều kiện mái nhà và mong muốn của khách hàng. Cấu hình, chi phí và phạm vi thi công được trao đổi theo công trình thực tế.</p><ul class="check-list"><li><Icon name="check"/>Tư vấn và lựa chọn phương án</li><li><Icon name="check"/>Khảo sát và thống nhất báo giá</li><li><Icon name="check"/>Triển khai, bàn giao và hỗ trợ sử dụng</li></ul></div><div class="about-photo"><Image src={roof} alt="Hình ảnh điện mặt trời mái nhà trong tư liệu website" width={850} format="webp"/></div></section><section class="section product-section"><div class="container"><p class="eyebrow">KẾT NỐI VỚI CHÚNG TÔI</p><h2>Trao đổi trực tiếp về nhu cầu.</h2><div class="info-columns"><article><h3>Hotline tư vấn</h3><p><a href={`tel:${site.phone}`} data-track="click_phone">{site.phoneDisplay}</a></p></article><article><h3>Email</h3><p><a href={`mailto:${site.email}`}>{site.email}</a></p></article><article><h3>Thông tin liên hệ</h3><p>{site.address}</p></article></div></div></section><Consultation/></BaseLayout>

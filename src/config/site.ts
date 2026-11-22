@@ -1,12 +1,17 @@
 export const site = {
-  brand: 'Điện mặt trời Hướng Dương',
-  description: 'Tư vấn giải pháp điện mặt trời theo nhu cầu sử dụng điện và điều kiện mái nhà.',
-  // Add the verified business details before publishing.
-  phone: '',
-  zalo: '',
-  email: '',
-  address: '',
-  serviceArea: 'Khu vực theo phạm vi khảo sát của đơn vị',
-  // Set true only after replacing the draft privacy text and business details.
-  readyToIndex: false
+  brand: 'HƯỚNG DƯƠNG SOLAR',
+  company: 'Công ty TNHH Năng Lượng Xanh Hướng Dương',
+  description: 'Giải pháp điện mặt trời hòa lưới và hybrid lưu trữ cho gia đình, doanh nghiệp. Tư vấn cấu hình và báo giá theo nhu cầu thực tế.',
+  // Public contact details copied from the business website on 22/11/2026.
+  phone: '0794213999',
+  phoneDisplay: '0794 213 999',
+  supportPhone: '0385195555',
+  zalo: 'https://zalo.me/0385195555',
+  email: 'huongduongsolar8386@gmail.com',
+  address: 'Căn 14 B26 Khu nhà ở Tân Lập, xã Hoài Đức, TP. Hà Nội',
+  hcmAddress: '45 Nguyễn Thị Căn, Tân Thới Hiệp 21, Quận 12, TP. Hồ Chí Minh',
+  sourceUrl: 'https://diennangluongmattroisolar.com',
+  productionUrl: 'https://solar-power-5w7.pages.dev',
+  // Set false if a future staging copy should be excluded from indexing.
+  readyToIndex: true
 };

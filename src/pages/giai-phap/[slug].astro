@@ -1,0 +1,13 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import Consultation from '../../components/Consultation.astro';
+import Icon from '../../components/Icon.astro';
+import {categories,products} from '../../data/catalog';
+import roof from '../../assets/solar/roof-detail.jpg';
+export function getStaticPaths(){return categories.map(category=>({params:{slug:category.slug},props:{category}}));}
+const {category}=Astro.props;
+---
+<BaseLayout title={`${category.name} | Hướng Dương Solar`}><PageIntro eyebrow={category.eyebrow} title={`Điện mặt trời ${category.name.toLowerCase()}.`} description={category.description}/><section class="section container about-grid"><div class="about-copy"><h2>Khi nào nên tìm hiểu giải pháp này?</h2><p>{category.ideal}</p><h3 class="spaced-heading">Những thông tin cần trao đổi</h3><ul class="check-list">{category.checks.map((item:string)=><li><Icon name="check"/>{item}</li>)}</ul><div class="hero-actions"><a class="button" href="#tu-van">Tư vấn nhu cầu của tôi</a><a class="inline-link" href={`/giai-phap/${category.slug==='hoa-luoi'?'luu-tru':'hoa-luoi'}/`}>Xem giải pháp còn lại</a></div></div><div class="about-photo"><Image src={roof} alt="Hình ảnh hệ thống điện mặt trời mái nhà từ tư liệu website" width={850} format="webp"/></div></section><section class="section product-section"><div class="container"><div class="section-heading"><div><p class="eyebrow">DANH MỤC THAM KHẢO</p><h2>Cấu hình {category.name.toLowerCase()}.</h2></div></div><div class="product-grid">{products.filter(p=>p.category===category.slug).map(product=><ProductCard product={product}/>)}</div><p class="price-note">Phương án thiết bị và khả năng dự phòng cần được xác nhận sau khảo sát. Không suy ra sản lượng hoặc thời gian hoàn vốn chỉ từ công suất giới thiệu.</p></div></section><Consultation/></BaseLayout>

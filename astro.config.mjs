@@ -5,7 +5,7 @@ import { loadEnv } from 'vite';
 
 const env = loadEnv(process.env.NODE_ENV || 'production', process.cwd(), 'PUBLIC_');
 export default defineConfig({
-  site: process.env.PUBLIC_SITE_URL || env.PUBLIC_SITE_URL || 'https://solar.example.com',
+  site: process.env.PUBLIC_SITE_URL || env.PUBLIC_SITE_URL || 'https://solar-power-5w7.pages.dev',
   output: 'static',
   integrations: [sitemap()],
   vite: { plugins: [tailwindcss()] }
