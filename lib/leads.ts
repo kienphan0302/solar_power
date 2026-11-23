@@ -2,10 +2,10 @@ import type { D1Database } from '@cloudflare/workers-types';
 
 export interface Env {
   DB: D1Database;
-  TURNSTILE_SECRET_KEY: string;
-  RESEND_API_KEY?: string;
-  LEAD_FROM_EMAIL?: string;
-  LEAD_NOTIFY_EMAIL?: string;
+  WATER_HEATER_TURNSTILE_SECRET_KEY?: string;
+  WATER_HEATER_RESEND_API_KEY?: string;
+  WATER_HEATER_FROM_EMAIL?: string;
+  WATER_HEATER_NOTIFY_EMAIL?: string;
 }
 
 export interface Lead {
@@ -39,18 +39,18 @@ async function verifyToken(token: string, secret: string, hostname: string): Pro
 
 async function notifySales(lead: Lead, env: Env): Promise<void> {
   const body = [
-    'Có yêu cầu tư vấn điện mặt trời mới.', `Mã: ${lead.id}`,
+    'Có yêu cầu tư vấn máy nước nóng / thiết bị gia đình mới.', `Mã: ${lead.id}`,
     `Họ tên: ${lead.name || '(không cung cấp)'}`, `Điện thoại: ${lead.phone}`,
-    `Khu vực: ${lead.area}`, `Tiền điện/tháng: ${lead.monthly_bill || '(không cung cấp)'}`,
+    `Khu vực: ${lead.area}`, `Sản phẩm / trang nguồn: ${lead.source_path}`,
     `Nguồn: ${lead.utm_source || '(trực tiếp)'} / ${lead.utm_campaign || ''}`
   ].join('\n');
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST', headers: {
-      Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json',
+      Authorization: `Bearer ${env.WATER_HEATER_RESEND_API_KEY}`, 'Content-Type': 'application/json',
       'Idempotency-Key': `lead-${lead.id}`
     },
-    body: JSON.stringify({ from: env.LEAD_FROM_EMAIL, to: [env.LEAD_NOTIFY_EMAIL],
-      subject: 'Yêu cầu tư vấn điện mặt trời mới', text: body }),
+    body: JSON.stringify({ from: env.WATER_HEATER_FROM_EMAIL, to: [env.WATER_HEATER_NOTIFY_EMAIL],
+      subject: 'Yêu cầu tư vấn Bình Nóng Lạnh mới', text: body }),
     signal: AbortSignal.timeout(8000)
   });
   if (!response.ok) throw new Error('Email provider rejected notification');
@@ -63,7 +63,8 @@ export function createLeadHandler(deps = { verifyToken, notifySales }) {
     const url = new URL(request.url);
     if (request.headers.get('origin') !== url.origin) return json({ success: false, message: 'Nguồn gửi không hợp lệ.' }, 403);
     if (!request.headers.get('content-type')?.includes('application/json')) return json({ success: false, message: 'Dữ liệu không hợp lệ.' }, 415);
-    if (!env.DB || !env.TURNSTILE_SECRET_KEY || (!localhost(url.hostname) && env.TURNSTILE_SECRET_KEY === testSecret)) {
+    const turnstileSecret = env.WATER_HEATER_TURNSTILE_SECRET_KEY;
+    if (!env.DB || (!localhost(url.hostname) && turnstileSecret === testSecret)) {
       return json({ success: false, message: 'Biểu mẫu chưa sẵn sàng. Vui lòng liên hệ trực tiếp.' }, 503);
     }
     let input: Record<string, unknown>;
@@ -80,11 +81,11 @@ export function createLeadHandler(deps = { verifyToken, notifySales }) {
     const area = clean(input.area, 160);
     const token = clean(input.token, 2048);
     if (!/^0\d{9}$/.test(phone) || area.length < 2 || !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id)
-      || input.consent !== true || !token || clean(input.website, 200)) {
+      || input.consent !== true || (turnstileSecret && !token) || clean(input.website, 200)) {
       return json({ success: false, message: 'Vui lòng kiểm tra số điện thoại, khu vực và đồng ý liên hệ.' }, 400);
     }
     try {
-      if (!await deps.verifyToken(token, env.TURNSTILE_SECRET_KEY, url.hostname)) {
+      if (turnstileSecret && !await deps.verifyToken(token, turnstileSecret, url.hostname)) {
         return json({ success: false, message: 'Xác minh chưa thành công. Vui lòng thử lại.' }, 400);
       }
     } catch { return json({ success: false, message: 'Chưa thể xác minh. Vui lòng thử lại sau.' }, 503); }
@@ -94,9 +95,14 @@ export function createLeadHandler(deps = { verifyToken, notifySales }) {
       source_path: clean(input.source_path, 300).startsWith('/') ? clean(input.source_path, 300).split('?')[0] : '/',
       utm_source: clean(input.utm_source, 120), utm_medium: clean(input.utm_medium, 120),
       utm_campaign: clean(input.utm_campaign, 120), utm_content: clean(input.utm_content, 120), utm_term: clean(input.utm_term, 120) };
-    const emailConfigured = !!(env.RESEND_API_KEY && env.LEAD_FROM_EMAIL && env.LEAD_NOTIFY_EMAIL);
+    const emailConfigured = !!(env.WATER_HEATER_RESEND_API_KEY && env.WATER_HEATER_FROM_EMAIL && env.WATER_HEATER_NOTIFY_EMAIL);
     let created = false;
     try {
+      const existing = await env.DB.prepare('SELECT id FROM leads WHERE id = ?').bind(lead.id).first<{ id: string }>();
+      if (existing) return json({ success: true, created: false, id: lead.id, message: 'Đã nhận yêu cầu. Nhân viên tư vấn sẽ liên hệ với bạn.' });
+      const since = new Date(Date.now() - 15 * 60 * 1000).toISOString();
+      const recent = await env.DB.prepare("SELECT COUNT(*) AS total FROM leads WHERE phone = ? AND source_path LIKE '/binh-nong-lanh/%' AND created_at >= ?").bind(lead.phone, since).first<{ total: number }>();
+      if ((recent?.total || 0) >= 3) return json({ success: false, message: 'Bạn đã gửi nhiều yêu cầu gần đây. Vui lòng chờ ít phút rồi thử lại.' }, 429);
       const result = await env.DB.prepare(`INSERT OR IGNORE INTO leads
         (id, name, phone, area, monthly_bill, source_path, utm_source, utm_medium, utm_campaign, utm_content, utm_term, notification_status)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)

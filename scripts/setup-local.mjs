@@ -1,11 +1,8 @@
-import { copyFile, constants } from 'node:fs/promises';
-for (const filename of ['.env', '.dev.vars']) {
-  try {
-    await copyFile(filename + '.example', filename, constants.COPYFILE_EXCL);
-    console.log('Created ' + filename);
-  } catch (error) {
-    if (error.code !== 'EEXIST') throw error;
-    console.log('Kept existing ' + filename);
-  }
+import { copyFile, access, readFile, writeFile } from 'node:fs/promises';
+const exists = async file => { try { await access(file); return true; } catch { return false; } };
+if (!await exists('.env')) {
+  const contents = (await readFile('.env.example', 'utf8')).replace('https://your-domain.example', 'http://127.0.0.1:4321');
+  await writeFile('.env', contents);
 }
-console.log('Next: npm run db:local, npm run build, npm run preview');
+if (!await exists('.dev.vars')) await copyFile('.dev.vars.example', '.dev.vars');
+console.log('Đã chuẩn bị cấu hình local. Chạy npm run db:local trước khi dùng npm run preview.');

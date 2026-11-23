@@ -1,19 +1,13 @@
 {
-	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "solar-marketing",
-	"pages_build_output_dir": "./dist",
-	"compatibility_date": "2026-11-22",
-	"d1_databases": [
-		{
-			"binding": "DB",
-			"database_name": "solar-leads",
-			"database_id": "ac352350-4d00-4f82-bba7-3bf2309a7440"
-		},
-		{
-			"binding": "solar_leads",
-			"database_name": "solar-leads",
-			"database_id": "ac352350-4d00-4f82-bba7-3bf2309a7440",
-			"remote": true
-		}
-	]
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "water-heater-marketing",
+  "pages_build_output_dir": "./dist",
+  "compatibility_date": "2026-11-23",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "solar-leads",
+      "database_id": "ac352350-4d00-4f82-bba7-3bf2309a7440"
+    }
+  ]
 }

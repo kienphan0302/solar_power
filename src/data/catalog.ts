@@ -1,17 +1,35 @@
-import data from './products.json';
-import grid from '../assets/solar/system-grid.png';
-import storage5 from '../assets/solar/storage-5.png';
-import storage8 from '../assets/solar/storage-8.png';
-import storage12 from '../assets/solar/storage-12.png';
-import storage16 from '../assets/solar/storage-16.png';
-import storage20 from '../assets/solar/storage-20.png';
-import type { ImageMetadata } from 'astro';
-const images: Record<string, ImageMetadata> = { 'system-grid': grid, 'storage-5': storage5, 'storage-8': storage8, 'storage-12': storage12, 'storage-16': storage16, 'storage-20': storage20 };
-export const products = data.map(p => ({ ...p, image: images[p.image], categoryLabel: p.category === 'luu-tru' ? 'Hybrid lưu trữ' : 'Hòa lưới bám tải' }));
-export type Product = (typeof products)[number];
-export const money = (price: number) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 }).format(price);
-export const productHref = (slug: string) => `/san-pham/${slug}/`;
-export const categories = [
-  { slug: 'hoa-luoi', name: 'Hòa lưới bám tải', eyebrow: 'TẬN DỤNG ĐIỆN BAN NGÀY', description: 'Giải pháp cần được tính toán theo phụ tải sử dụng trong ngày và điều kiện đấu nối tại công trình.', ideal: 'Gia đình, cửa hàng hoặc cơ sở có nhu cầu dùng điện ban ngày.', checks: ['Biểu đồ sử dụng điện trong ngày', 'Công suất tải và phương án bám tải', 'Diện tích, hướng mái và bóng che', 'Điều kiện đấu nối tại công trình'] },
-  { slug: 'luu-tru', name: 'Hybrid lưu trữ', eyebrow: 'CÂN NHẮC NHU CẦU DỰ PHÒNG', description: 'Kết hợp hệ thống điện mặt trời và phương án lưu trữ theo nhu cầu dùng điện ngoài giờ nắng.', ideal: 'Khách hàng cần đánh giá thêm nhu cầu sử dụng điện buổi tối hoặc dự phòng.', checks: ['Thiết bị cần cấp điện và công suất tải', 'Thời gian dự phòng mong muốn', 'Dung lượng lưu trữ và thiết bị tương thích', 'Phạm vi tải dự phòng được thiết kế'] }
-];
+import rawProducts from './products.json';
+import rawCategories from './categories.json';
+import rawSourceCategories from './source-categories.json';
+
+export interface ProductImage { sourceUrl: string; localPath: string; alt: string; }
+export interface ProductSpec { label: string; value: string; }
+export interface ProductVariant { id?: string | number; name?: string; price?: number | null; attributes?: Record<string, string>; }
+export interface Category { key: string; name: string; sourceUrl?: string; description?: string; mainKey?: string; }
+export interface Product {
+  id: number | string; slug: string; name: string; categoryKey: string;
+  categories: Category[]; brand?: string; price: number | null; regularPrice?: number | null;
+  summary: string; specs: ProductSpec[]; images: ProductImage[]; sourceUrl: string;
+  variants?: ProductVariant[]; sourceStatus?: string; priceMax?: number | null;
+}
+
+export const products = rawProducts as unknown as Product[];
+export const categories = rawCategories as unknown as Category[];
+export const sourceCategories = rawSourceCategories as unknown as Category[];
+export const allCategories = [...categories, ...sourceCategories.filter(category => category.key !== 'uncategorized' && !categories.some(main => main.key === category.key))];
+export const money = (value: number) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 }).format(value);
+export const productPrice = (product: Product) => product.price && product.price > 0 ? (product.priceMax && product.priceMax > product.price ? `${money(product.price)} – ${money(product.priceMax)}` : money(product.price)) : 'Liên hệ';
+export const productHref = (product: Product) => `/san-pham/${product.slug}/`;
+export const categoryHref = (category: Category | string) => `/danh-muc/${typeof category === 'string' ? category : category.key}/`;
+export const categoryName = (key: string) => allCategories.find(category => category.key === key)?.name || 'Thiết bị gia đình';
+export const productImage = (product: Product) => product.images[0]?.localPath || '/images/product-placeholder.svg';
+export const productsInCategory = (key: string) => products.filter(product => product.categoryKey === key || product.categories.some(category => category.key === key));
+export const normalizeSearch = (value: string) => value.toLocaleLowerCase('vi').normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/đ/g, 'd').trim();
+export const categoryIcon = (category: Category) => {
+  const key = normalizeSearch(category.name);
+  if (key.includes('loc')) return 'filter';
+  if (key.includes('sen') || key.includes('voi')) return 'faucet';
+  if (key.includes('chau')) return 'sink';
+  if (key.includes('nong') || key.includes('nlmt')) return 'sun';
+  return 'tank';
+};

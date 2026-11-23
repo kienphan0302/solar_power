@@ -1,6 +1,4 @@
-# Official Cloudflare test secret. This starter accepts it only on localhost.
-TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
-# Optional: verified Resend sending domain and sales recipient.
-RESEND_API_KEY=
-LEAD_FROM_EMAIL=
-LEAD_NOTIFY_EMAIL=
+WATER_HEATER_TURNSTILE_SECRET_KEY=
+WATER_HEATER_RESEND_API_KEY=
+WATER_HEATER_FROM_EMAIL=
+WATER_HEATER_NOTIFY_EMAIL=

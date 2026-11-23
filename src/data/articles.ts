@@ -1,17 +1,17 @@
 export const articles = [
-  { slug: 'chon-hoa-luoi-hay-luu-tru', tag: 'CHỌN GIẢI PHÁP', title: 'Hòa lưới hay hybrid lưu trữ?', summary: 'Bắt đầu từ thời điểm sử dụng điện và nhu cầu dự phòng để trao đổi phương án phù hợp.', sections: [
-    { title: 'Xem lại thời điểm sử dụng điện', text: 'Hóa đơn hàng tháng là thông tin ban đầu. Cần trao đổi thêm điện được sử dụng nhiều vào ban ngày hay buổi tối, những thiết bị nào hoạt động thường xuyên và công suất tải thực tế.' },
-    { title: 'Làm rõ nhu cầu lưu trữ và dự phòng', text: 'Nếu cần sử dụng điện từ pin lưu trữ, hãy liệt kê tải cần cấp điện và thời gian mong muốn. Khả năng dự phòng còn phụ thuộc biến tần, bộ lưu trữ và thiết kế đấu nối của hệ thống.' },
-    { title: 'Xác nhận phương án sau khảo sát', text: 'Mái nhà, bóng che, vị trí thiết bị và điều kiện đấu nối ảnh hưởng đến thiết kế. Báo giá cần ghi rõ model thiết bị, công suất, dung lượng lưu trữ nếu có, hạng mục thi công và bảo hành.' }
-  ] },
-  { slug: 'chuan-bi-truoc-khao-sat', tag: 'CHUẨN BỊ KHẢO SÁT', title: 'Chuẩn bị gì trước buổi tư vấn điện mặt trời?', summary: 'Một số thông tin đơn giản giúp buổi trao đổi đi đúng nhu cầu của công trình.', sections: [
-    { title: 'Hóa đơn điện và cách sử dụng', text: 'Chuẩn bị hóa đơn điện gần nhất nếu thuận tiện. Ghi lại các thiết bị dùng thường xuyên, thời điểm hoạt động và những thay đổi dự kiến như bổ sung điều hòa hoặc máy móc.' },
-    { title: 'Thông tin mái nhà', text: 'Có thể cung cấp ảnh tổng thể mái và vị trí dự kiến đặt thiết bị nếu đã có sẵn. Việc kiểm tra trực tiếp mái, kết cấu, bóng che và phương án đi dây cần được thực hiện bởi người có chuyên môn.' },
-    { title: 'Các câu hỏi cần thống nhất', text: 'Trao đổi về phạm vi cung cấp, thời gian khảo sát, hạng mục phát sinh, quy trình bàn giao, hướng dẫn vận hành và đầu mối liên hệ khi cần hỗ trợ.' }
-  ] },
-  { slug: 'doc-bao-gia-dien-mat-troi', tag: 'CHI PHÍ & THIẾT BỊ', title: 'Đọc báo giá điện mặt trời theo từng hạng mục.', summary: 'So sánh cấu hình và phạm vi cung cấp trước khi so sánh tổng tiền.', sections: [
-    { title: 'Thiết bị và đơn vị đo', text: 'Kiểm tra số lượng, model và công suất của tấm pin, biến tần. Với hệ có lưu trữ, cần thêm thông tin dung lượng kWh. Công suất kW và dung lượng kWh là hai thông số khác nhau.' },
-    { title: 'Vật tư và phạm vi thi công', text: 'Làm rõ khung đỡ, dây dẫn, thiết bị bảo vệ, đường đi dây, hạng mục vận chuyển và các điều kiện thi công cụ thể. Các báo giá chỉ so sánh được khi phạm vi cung cấp tương ứng.' },
-    { title: 'Bảo hành và bàn giao', text: 'Yêu cầu ghi rõ điều kiện bảo hành của từng thiết bị, bảo hành hạng mục thi công, hồ sơ bàn giao và cách liên hệ hỗ trợ. Tổng chi phí được xác nhận trong báo giá hoặc hợp đồng cụ thể.' }
-  ] }
+  {slug:'chon-may-nuoc-nong-theo-nhu-cau',title:'Chọn máy nước nóng từ nhu cầu thực tế',eyebrow:'LỰA CHỌN SẢN PHẨM',excerpt:'Chuẩn bị thông tin về thói quen sử dụng, vị trí lắp đặt và model đang cân nhắc.',icon:'sun',sections:[
+    {title:'Bắt đầu từ cách gia đình sử dụng nước nóng',text:'Ghi lại các khu vực cần dùng nước nóng, thời điểm sử dụng và số người trong gia đình. Những thông tin này giúp buổi tư vấn tập trung vào nhu cầu cụ thể. Dung tích được chọn cần đối chiếu với hướng dẫn của từng model và điều kiện thực tế.'},
+    {title:'Xem kỹ không gian và điều kiện lắp đặt',text:'Chuẩn bị ảnh khu vực dự kiến lắp, vị trí cấp nước và đường dẫn đến nơi sử dụng. Với máy nước nóng năng lượng mặt trời, cần trao đổi thêm về vị trí đặt máy và tình trạng che bóng. Phương án kỹ thuật cần được người có chuyên môn kiểm tra trước khi thi công.'},
+    {title:'Đối chiếu thông số theo đúng model',text:'Tên dòng máy, dung tích, kích thước và thông tin vật liệu có thể khác nhau giữa các phiên bản. Hãy dùng mã model đầy đủ khi yêu cầu báo giá và xác nhận lại thông số trên tài liệu sản phẩm trước khi mua.'}
+  ]},
+  {slug:'doc-bao-gia-va-pham-vi-lap-dat',title:'Một báo giá rõ ràng cần có những gì?',eyebrow:'BÁO GIÁ & LẮP ĐẶT',excerpt:'Phân biệt giá thiết bị với vật tư, vận chuyển và các hạng mục lắp đặt cụ thể.',icon:'book',sections:[
+    {title:'Tên thiết bị và cấu hình cung cấp',text:'Một báo giá nên ghi rõ tên sản phẩm, model, số lượng và các phụ kiện đi kèm. Nếu sản phẩm có nhiều phiên bản hoặc dung tích, hãy yêu cầu ghi đúng phương án đang trao đổi để tránh so sánh các cấu hình khác nhau.'},
+    {title:'Phạm vi công việc và chi phí liên quan',text:'Trao đổi rõ về vận chuyển, đưa thiết bị đến vị trí lắp, vật tư kết nối và việc xử lý các hạng mục phát sinh. Giá tham khảo trên danh mục chưa thay thế báo giá được xác nhận cho điều kiện của từng công trình.'},
+    {title:'Tiến độ, thanh toán và bàn giao',text:'Trước khi chốt phương án, thống nhất lịch giao hàng, điều kiện thanh toán, chứng từ và nội dung bàn giao. Các thay đổi trong quá trình triển khai nên được trao đổi và xác nhận trước khi thực hiện.'}
+  ]},
+  {slug:'chuan-bi-thong-tin-bao-hanh',title:'Lưu thông tin để thuận tiện khi bảo hành',eyebrow:'SỬ DỤNG & BẢO HÀNH',excerpt:'Model, số sê-ri, chứng từ và hình ảnh lắp đặt giúp quá trình hỗ trợ rõ ràng hơn.',icon:'shield',sections:[
+    {title:'Giữ lại thông tin nhận diện sản phẩm',text:'Lưu tên model, số sê-ri nếu có, hóa đơn hoặc chứng từ mua hàng và phiếu bảo hành. Có thể chụp lại tem sản phẩm khi nhận hàng để dễ đối chiếu sau này.'},
+    {title:'Xác nhận chính sách cho từng sản phẩm',text:'Thời hạn, bộ phận được bảo hành và điều kiện áp dụng phụ thuộc từng model, hãng và chứng từ cung cấp. Hãy xác nhận các nội dung này trong báo giá hoặc tài liệu bàn giao, thay vì suy ra từ một sản phẩm khác cùng nhóm.'},
+    {title:'Mô tả rõ khi cần hỗ trợ',text:'Khi liên hệ hỗ trợ, chuẩn bị thông tin sản phẩm, thời điểm lắp đặt và mô tả hiện tượng quan sát được. Với các vấn đề liên quan đến điện hoặc an toàn thiết bị, cần liên hệ người có chuyên môn thay vì tự tháo sửa.'}
+  ]}
 ];
