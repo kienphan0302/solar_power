@@ -7,7 +7,14 @@ import storage16 from '../assets/solar/storage-16.png';
 import storage20 from '../assets/solar/storage-20.png';
 import type { ImageMetadata } from 'astro';
 const images: Record<string, ImageMetadata> = { 'system-grid': grid, 'storage-5': storage5, 'storage-8': storage8, 'storage-12': storage12, 'storage-16': storage16, 'storage-20': storage20 };
-export const products = data.map(p => ({ ...p, image: images[p.image], categoryLabel: p.category === 'luu-tru' ? 'Hybrid lưu trữ' : 'Hòa lưới bám tải' }));
+const capacityFormatter = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 2 });
+export const products = data.map(p => ({
+  ...p,
+  capacityUnit: p.capacityUnit ?? 'kW',
+  capacityLabel: `${capacityFormatter.format(p.capacity)} ${p.capacityUnit ?? 'kW'}`,
+  image: images[p.image],
+  categoryLabel: p.category === 'luu-tru' ? 'Hybrid lưu trữ' : 'Hòa lưới bám tải'
+}));
 export type Product = (typeof products)[number];
 export const money = (price: number) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 }).format(price);
 export const productHref = (slug: string) => `/san-pham/${slug}/`;

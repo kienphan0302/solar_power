@@ -6,5 +6,5 @@ const { product } = Astro.props;
 ---
 <article class="product-card" data-product data-category={product.category} data-capacity={product.capacity} data-price={product.price} data-name={product.name.toLocaleLowerCase('vi-VN')}>
   <a class="product-visual" href={productHref(product.slug)} aria-label={`Xem ${product.name}`}><span class="product-type">{product.categoryLabel}</span><Image src={product.image} alt={product.name} width={440} format="webp" loading="lazy" /></a>
-  <div class="product-info"><p class="product-capacity">CẤU HÌNH {product.capacity} kW</p><h3><a href={productHref(product.slug)}>{product.name}</a></h3><p class="price-label">Giá tham khảo</p><p class="product-price">{money(product.price)}</p><div class="product-actions"><a href={productHref(product.slug)} class="product-details">Xem cấu hình</a><a href={`${productHref(product.slug)}#tu-van`} class="small-cta">Nhận tư vấn</a></div></div>
+  <div class="product-info"><p class="product-capacity">CẤU HÌNH {product.capacityLabel}</p><h3><a href={productHref(product.slug)}>{product.name}</a></h3><p class="price-label">Giá tham khảo</p><p class="product-price">{money(product.price)}</p><div class="product-actions"><a href={productHref(product.slug)} class="product-details">Xem cấu hình</a><a href={`${productHref(product.slug)}#tu-van`} class="small-cta">Nhận tư vấn</a></div></div>
 </article>
