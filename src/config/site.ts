@@ -2,9 +2,9 @@ export const site = {
   brand: 'HƯỚNG DƯƠNG SOLAR',
   company: 'Công ty TNHH Năng Lượng Xanh Hướng Dương',
   description: 'Giải pháp điện mặt trời hòa lưới và hybrid lưu trữ cho gia đình, doanh nghiệp. Tư vấn cấu hình và báo giá theo nhu cầu thực tế.',
-  // Public contact details copied from the business website on 22/11/2026.
-  phone: '0794213999',
-  phoneDisplay: '0794 213 999',
+  // Public contact details; hotline confirmed by the owner on 23/11/2026.
+  phone: '0385195555',
+  phoneDisplay: '0385 195 555',
   supportPhone: '0385195555',
   zalo: 'https://zalo.me/0385195555',
   email: 'huongduongsolar8386@gmail.com',
