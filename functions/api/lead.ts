@@ -1,2 +1,1 @@
-import { createLeadHandler } from '../../lib/leads';
-export const onRequest = createLeadHandler();
+export { onRequest } from '../_middleware';

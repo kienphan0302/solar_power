@@ -3,11 +3,6 @@
   "name": "water-heater-marketing",
   "pages_build_output_dir": "./dist",
   "compatibility_date": "2026-11-23",
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "solar-leads",
-      "database_id": "ac352350-4d00-4f82-bba7-3bf2309a7440"
-    }
-  ]
+  "d1_databases": [],
+  "env": { "preview": { "d1_databases": [] } }
 }
