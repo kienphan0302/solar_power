@@ -1,0 +1,72 @@
+
+settings:
+  content:
+    merge: true
+
+content:
+  - name: products
+    label: Quản lý sản phẩm Solar
+    type: file
+    path: src/data/products.json
+    format: json
+    list: true
+
+    operations:
+      delete: false
+      rename: false
+
+    fields:
+      - name: id
+        label: Mã sản phẩm
+        type: number
+        readonly: true
+
+      - name: slug
+        label: Đường dẫn SEO
+        type: string
+        readonly: true
+
+      - name: name
+        label: Tên sản phẩm
+        type: string
+        required: true
+
+      - name: price
+        label: Giá bán VNĐ
+        type: number
+        required: true
+        options:
+          min: 0
+
+      - name: capacity
+        label: Công suất
+        type: number
+        required: true
+        options:
+          min: 0
+
+      - name: capacityUnit
+        label: Đơn vị công suất
+        type: select
+        options:
+          values: [kW, kWp]
+
+      - name: category
+        label: Danh mục sản phẩm
+        type: select
+        options:
+          values:
+            - name: hoa-luoi
+              label: Hòa lưới bám tải
+            - name: luu-tru
+              label: Hybrid lưu trữ
+
+      - name: image
+        label: Mã hình ảnh
+        type: string
+        readonly: true
+
+      - name: sourceUrl
+        label: Đường dẫn nguồn
+        type: string
+        readonly: true
