@@ -1,15 +1,16 @@
+import contact from './contact.json';
 export const site = {
   brand: 'HƯỚNG DƯƠNG SOLAR',
-  company: 'Công ty TNHH Năng Lượng Xanh Hướng Dương',
-  description: 'Giải pháp điện mặt trời hòa lưới và hybrid lưu trữ cho gia đình, doanh nghiệp. Tư vấn cấu hình và báo giá theo nhu cầu thực tế.',
+  company: contact.company,
+  description: contact.description,
   // Public contact details; hotline confirmed by the owner on 23/11/2026.
-  phone: '0385195555',
-  phoneDisplay: '0385 195 555',
-  supportPhone: '0385195555',
-  zalo: 'https://zalo.me/0385195555',
-  email: 'huongduongsolar8386@gmail.com',
-  address: 'Căn 14 B26 Khu nhà ở Tân Lập, xã Hoài Đức, TP. Hà Nội',
-  hcmAddress: '45 Nguyễn Thị Căn, Tân Thới Hiệp 21, Quận 12, TP. Hồ Chí Minh',
+  phone: contact.phone,
+  phoneDisplay: /^0\d{9}$/.test(contact.phone) ? contact.phone.replace(/^(\d{4})(\d{3})(\d{3})$/, '$1 $2 $3') : contact.phone,
+  supportPhone: contact.phone,
+  zalo: contact.zalo,
+  email: contact.email,
+  address: contact.address,
+  hcmAddress: contact.hcmAddress,
   sourceUrl: 'https://diennangluongmattroisolar.com',
   productionUrl: 'https://solar-power-5w7.pages.dev',
   // Set false if a future staging copy should be excluded from indexing.

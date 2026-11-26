@@ -3,15 +3,18 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=24.0.0" },
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "scripts": {
     "setup": "node scripts/setup-local.mjs",
     "dev": "astro dev --host 127.0.0.1",
     "check": "astro check",
-    "build": "astro build",
+    "build": "npm run check:cms && astro build",
     "preview": "wrangler pages dev dist --ip 127.0.0.1",
     "test": "node --import tsx --test tests/*.test.ts",
-    "db:local": "wrangler d1 execute solar-leads --local --file=schema.sql"
+    "db:local": "wrangler d1 execute solar-leads --local --file=schema.sql",
+    "check:cms": "node scripts/check-cms.mjs"
   },
   "dependencies": {
     "astro": "7.4.13",

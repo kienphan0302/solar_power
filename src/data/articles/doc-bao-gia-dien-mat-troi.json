@@ -1,0 +1,24 @@
+{
+  "tag": "CHI PHÍ & THIẾT BỊ",
+  "title": "Đọc báo giá điện mặt trời theo từng hạng mục.",
+  "summary": "So sánh cấu hình và phạm vi cung cấp trước khi so sánh tổng tiền.",
+  "sections": [
+    {
+      "title": "Thiết bị và đơn vị đo",
+      "text": "Kiểm tra số lượng, model và công suất của tấm pin, biến tần. Với hệ có lưu trữ, cần thêm thông tin dung lượng kWh. Công suất kW và dung lượng kWh là hai thông số khác nhau."
+    },
+    {
+      "title": "Vật tư và phạm vi thi công",
+      "text": "Làm rõ khung đỡ, dây dẫn, thiết bị bảo vệ, đường đi dây, hạng mục vận chuyển và các điều kiện thi công cụ thể. Các báo giá chỉ so sánh được khi phạm vi cung cấp tương ứng."
+    },
+    {
+      "title": "Bảo hành và bàn giao",
+      "text": "Yêu cầu ghi rõ điều kiện bảo hành của từng thiết bị, bảo hành hạng mục thi công, hồ sơ bàn giao và cách liên hệ hỗ trợ. Tổng chi phí được xác nhận trong báo giá hoặc hợp đồng cụ thể."
+    }
+  ],
+  "order": 3,
+  "seoTitle": "",
+  "seoDescription": "",
+  "cover": "",
+  "coverAlt": ""
+}

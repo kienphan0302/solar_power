@@ -8,7 +8,8 @@ import storage20 from '../assets/solar/storage-20.png';
 import type { ImageMetadata } from 'astro';
 const images: Record<string, ImageMetadata> = { 'system-grid': grid, 'storage-5': storage5, 'storage-8': storage8, 'storage-12': storage12, 'storage-16': storage16, 'storage-20': storage20 };
 const capacityFormatter = new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 2 });
-export const products = data.map(p => ({
+type CmsProduct = (typeof data)[number] & { cmsImage?: string | null; cmsImageAlt?: string | null };
+export const products = (data as CmsProduct[]).map(p => ({
   ...p,
   capacityUnit: p.capacityUnit ?? 'kW',
   capacityLabel: `${capacityFormatter.format(p.capacity)} ${p.capacityUnit ?? 'kW'}`,
